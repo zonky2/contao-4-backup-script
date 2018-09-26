@@ -118,7 +118,7 @@ ${MYSQLDUMP} \
     --port=${DBPORT} \
     ${DBOPTIONS} \
     ${DBNAME} \
-    > ${TARGET_DIR}/${DUMP_NAME}_${NOW}.sql && gzip ${TARGET_DIR}/${DUMP_NAME}_${NOW}.sql
+    > ${TARGET_DIR}/${DUMP_NAME}_${NOW}.sql && gzip --force ${TARGET_DIR}/${DUMP_NAME}_${NOW}.sql
 
 
 # Alte Backups rollierend löschen
