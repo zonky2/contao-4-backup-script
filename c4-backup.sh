@@ -112,10 +112,10 @@ DBNAME=$(get_db_name)
 DBPORT=$(get_db_port)
 
 ${MYSQLDUMP} \
-    --user=${DBUSER} \
-    --password=${DBPASSWORD} \
-    --host=${DBHOST} \
-    --port=${DBPORT} \
+    --user="${DBUSER}" \
+    --password="${DBPASSWORD}" \
+    --host="${DBHOST}" \
+    --port="${DBPORT}" \
     ${DBOPTIONS} \
     ${DBNAME} \
     > ${TARGET_DIR}/${DUMP_NAME}_${NOW}.sql && gzip --force ${TARGET_DIR}/${DUMP_NAME}_${NOW}.sql
