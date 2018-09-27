@@ -48,6 +48,13 @@ BACKUP_CONTAO_FILES=1
 #BACKUP_CONTAO_FILES=0
 
 
+# Zusätzlich zum Standard (composer.{json,lock}, app/, ..., src/) zu
+# sichernde Verzeichnisse und Dateien.
+# Pfadangabe jeweils relativ zum CONTAO_DIR.
+
+BACKUP_USER_DIRS=''
+
+
 # Verzeichnis in dem das Haupt-Skript (c4-backup.sh) gespeichert ist.
 # Wird u.A. für absolute Pfade in cron jobs benötigt.
 
