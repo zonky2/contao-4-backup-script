@@ -52,10 +52,6 @@ fi
 
 
 # Backup "der anderen" Dateien.
-
-# read
-# ### -r        ... raw input - disables interpretion of backslash escapes and line-continuation in the read data
-# -d<DELIM> ... recognize <DELIM> as data-end, rather than <newline>
 # (a) Dateien, die in einer Standard Managed-Edition vorhanden sind
 
 read -d '' FILE_LIST <<- EOF
@@ -86,16 +82,18 @@ fi
 ( cd ${CONTAO_DIR} && tar cfz ${TARGET_DIR}/${DUMP_NAME}_${NOW}.tar.gz ${FILE_LIST} )
 
 
-# Datenbank Verbindungsdaten
+# Datenbank Verbindungsdaten bestimmen
 
-# Datenbank Verbindungsdaten aus der Installation holen
-# Ausgabe z.B.
+# Dazu die Datenbank Verbindungsdaten aus der Installation holen.
+# Die Ausgabe sieht z.B. so aus:
 #
 # --------------- -------
 #   Parameter       Value
 #  --------------- -------
 #   database_user   jdbc
 #  --------------- -------
+#
+# Wir benötigen "das zweite Wort der vierten Zeile" (den "Value")
 
 function get_db_param() {
     PARAMETER=$1
