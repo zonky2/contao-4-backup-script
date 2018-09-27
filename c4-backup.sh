@@ -56,6 +56,7 @@ fi
 # read
 # ### -r        ... raw input - disables interpretion of backslash escapes and line-continuation in the read data
 # -d<DELIM> ... recognize <DELIM> as data-end, rather than <newline>
+# (a) Dateien, die in einer Standard Managed-Edition vorhanden sind
 
 read -d '' FILE_LIST <<- EOF
     composer.json composer.lock
@@ -65,6 +66,22 @@ read -d '' FILE_LIST <<- EOF
   web/.htaccess
 EOF
 
+# (b) ggf. vorhandenes Verzeichnis src/ (anwendungsspezifische Erweiterungen)
+
+if [ -d ${CONTAO_DIR}/src ]
+then
+    FILE_LIST="${FILE_LIST} src/"
+fi
+
+# (c) Benutzerdefinierte Verzeichnisse (können in der Konfiguration angegeben werden)
+
+if [[ ! -z ${BACKUP_USER_DIRS} ]]
+then
+    FILE_LIST="${FILE_LIST} ${BACKUP_USER_DIRS}"
+fi
+
+
+#  FILE_LIST sichern
 
 ( cd ${CONTAO_DIR} && tar cfz ${TARGET_DIR}/${DUMP_NAME}_${NOW}.tar.gz ${FILE_LIST} )
 
