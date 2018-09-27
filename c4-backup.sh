@@ -58,10 +58,10 @@ fi
 # -d<DELIM> ... recognize <DELIM> as data-end, rather than <newline>
 
 read -d '' FILE_LIST <<- EOF
-  app/config/parameters.yml
-  composer.json composer.lock
-  system/config/localconfig.php
-  templates
+    composer.json composer.lock
+    system/config/localconfig.php
+    app/
+    templates/
   web/.htaccess
 EOF
 
