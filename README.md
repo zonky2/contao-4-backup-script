@@ -6,6 +6,11 @@ Erstellt ein Backup einer Contao 4 Installation. Erzeugt werden drei Dateien:
 * Sicherung der für eine Wiederherstellung benötigten Dateien 
 * Sicherung des `files/` Verzeichnisses
 
+## Requirements
+
+* bash
+* PHP-Cli
+* `mysqldump`
 
 ## Verwendung
 
