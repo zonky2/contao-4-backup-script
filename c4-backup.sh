@@ -61,7 +61,7 @@ read -d '' FILE_LIST <<- EOF
     system/config/localconfig.php
     app/
     templates/
-  web/.htaccess
+    web/.htaccess
 EOF
 
 # (b) ggf. vorhandenes Verzeichnis src/ (anwendungsspezifische Erweiterungen)
