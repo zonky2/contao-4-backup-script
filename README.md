@@ -15,7 +15,7 @@ Erstellt ein Backup einer Contao 4 Installation. Erzeugt werden drei Dateien:
 
 ## Was noch fehlt
 
-* Liste der gesicherten Dateien auf "ist alles benötigte" prüfen
+* Liste der gesicherten Dateien auf ist "alles benötigte" dabei prüfen
 * Optional bestimmte Tabellen wie z.B. `tl_log` beim Datenbank-Dump nicht berücksichtigen
 * `mysqldump` ohne (direkte) Angabe des Passworts: `mysqldump --defaults-file=/path-to-file/my.cnf` 
 und `my.cnf` so: 
