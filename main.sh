@@ -68,6 +68,13 @@ SCRIPT_DIR=/dir/where/the/main/backup_script/is/located
 DBOPTIONS='--hex-blob --add-drop-table --comments --dump-date'
 
 
+# Nicht zu sichernde Datenbanktabellen
+# Eine durch Leerzeichen getrennte Liste, die aber auch leer sein darf.
+
+#SKIP_THESE_TABLES=''
+SKIP_THESE_TABLES='tl_log tl_search tl_search_index tl_session'
+
+
 # Alte Backups nach x Tagen periodisch löschen?
 # Auf 0 setzen um das Löschen zu deaktivieren.
 

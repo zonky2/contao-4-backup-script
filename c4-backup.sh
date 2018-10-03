@@ -128,12 +128,25 @@ DBHOST=$(get_db_host)
 DBNAME=$(get_db_name)
 DBPORT=$(get_db_port)
 
+
+IGNORE_TABLES=''
+
+if [ ! -z "${SKIP_THESE_TABLES}" ]
+then
+    # die angegebenen Tabellen nicht in die Datenbanksicherung aufnehmen
+    for TABLE in ${SKIP_THESE_TABLES}
+    do
+        IGNORE_TABLES="${IGNORE_TABLES} --ignore-table=${DBNAME}.${TABLE}"
+    done
+fi
+
 ${MYSQLDUMP} \
     --user="${DBUSER}" \
     --password="${DBPASSWORD}" \
     --host="${DBHOST}" \
     --port="${DBPORT}" \
     ${DBOPTIONS} \
+    ${IGNORE_TABLES} \
     ${DBNAME} \
     > ${TARGET_DIR}/${DUMP_NAME}_${NOW}.sql && gzip --force ${TARGET_DIR}/${DUMP_NAME}_${NOW}.sql
 
