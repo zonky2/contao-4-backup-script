@@ -148,7 +148,18 @@ ${MYSQLDUMP} \
     ${DBOPTIONS} \
     ${IGNORE_TABLES} \
     ${DBNAME} \
-    > ${TARGET_DIR}/${DUMP_NAME}_${NOW}.sql && gzip --force ${TARGET_DIR}/${DUMP_NAME}_${NOW}.sql
+    > ${TARGET_DIR}/${DUMP_NAME}_${NOW}.sql \
+    && ${MYSQLDUMP} \
+    --user="${DBUSER}" \
+    --password="${DBPASSWORD}" \
+    --host="${DBHOST}" \
+    --port="${DBPORT}" \
+    --no-data \
+    ${DBOPTIONS} \
+    ${DBNAME} \
+    ${SKIP_THESE_TABLES} \
+    >> ${TARGET_DIR}/${DUMP_NAME}_${NOW}.sql \
+    && gzip --force ${TARGET_DIR}/${DUMP_NAME}_${NOW}.sql
 
 
 # Alte Backups rollierend löschen

@@ -70,6 +70,7 @@ DBOPTIONS='--hex-blob --add-drop-table --comments --dump-date'
 
 # Nicht zu sichernde Datenbanktabellen
 # Eine durch Leerzeichen getrennte Liste, die aber auch leer sein darf.
+# Von diesen Tabellen wird nur die Tabellenstruktur, aber keine Daten gesichert.
 
 #SKIP_THESE_TABLES=''
 SKIP_THESE_TABLES='tl_log tl_search tl_search_index tl_session'
