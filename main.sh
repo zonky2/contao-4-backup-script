@@ -82,7 +82,7 @@ DBOPTIONS='--hex-blob --add-drop-table --comments --dump-date'
 # Von diesen Tabellen wird nur die Tabellenstruktur, aber keine Daten gesichert.
 
 #SKIP_THESE_TABLES=''
-SKIP_THESE_TABLES='tl_log tl_search tl_search_index tl_session'
+SKIP_THESE_TABLES='tl_log tl_search tl_search_index tl_session tl_undo tl_version'
 
 
 # Alte Backups nach x Tagen periodisch löschen?
