@@ -55,6 +55,15 @@ BACKUP_CONTAO_FILES=1
 BACKUP_USER_DIRS=''
 
 
+# Wie BACKUP_USER_DIRS, nur für einzelne Dateien.
+# Kann für Dateien aus web/, die nicht zwingend existieren müssen
+# (wie z.B. web/robots.txt web/manifest.json) oder beliebige andere
+# Dateien verwendet werden. Angabe jeweils relativ zum CONTAO_DIR.
+
+#BACKUP_USER_FILES='web/robots.txt web/manifest.json system/config/dcaconfig.php'
+BACKUP_USER_FILES=''
+
+
 # Verzeichnis in dem das Haupt-Skript (c4-backup.sh) gespeichert ist.
 # Wird u.A. für absolute Pfade in cron jobs benötigt.
 

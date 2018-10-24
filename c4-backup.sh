@@ -83,6 +83,18 @@ then
         fi
     done
 fi
+
+# (d) Wie (c), nur für einzelne Dateien
+
+if [[ ! -z ${BACKUP_USER_FILES} ]]
+then
+    for f in ${BACKUP_USER_FILES}
+    do
+        if [ -e ${CONTAO_DIR}/${f} ]
+        then
+            FILE_LIST="${FILE_LIST} ${f}"
+        fi
+    done
 fi
 
 
