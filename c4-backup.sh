@@ -75,7 +75,14 @@ fi
 
 if [[ ! -z ${BACKUP_USER_DIRS} ]]
 then
-    FILE_LIST="${FILE_LIST} ${BACKUP_USER_DIRS}"
+    for d in ${BACKUP_USER_DIRS}
+    do
+        if [ -d ${CONTAO_DIR}/$d ]
+        then
+            FILE_LIST="${FILE_LIST} ${d}"
+        fi
+    done
+fi
 fi
 
 
