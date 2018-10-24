@@ -51,7 +51,11 @@ BACKUP_CONTAO_FILES=1
 # Zusätzlich zum Standard (composer.{json,lock}, app/, ..., src/) zu
 # sichernde Verzeichnisse und Dateien.
 # Pfadangabe jeweils relativ zum CONTAO_DIR.
+# Bsp.:
+# * das share/ Verzeichnis mit der/den Sitemaps
+# * Unterverzeichnis(se) von system/modules/ bei manuell installierten Contao 3 Erweiterungen
 
+#BACKUP_USER_DIRS='web/share/ system/modules/myextension/'
 BACKUP_USER_DIRS=''
 
 
