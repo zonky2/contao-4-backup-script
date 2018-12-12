@@ -47,7 +47,7 @@ NOW=$(date +"%Y-%m-%d")
 
 if [ ${BACKUP_CONTAO_FILES} -gt 0 ]
 then
-    ( cd ${CONTAO_DIR} && tar cfz ${TARGET_DIR}/${DUMP_NAME}_files_${NOW}.tar.gz files )
+    ( cd ${CONTAO_DIR} && ${TAR} cf ${TARGET_DIR}/${DUMP_NAME}_files_${NOW}.tar files && gzip ${TARGET_DIR}/${DUMP_NAME}_files_${NOW}.tar )
 else
     ( cd ${CONTAO_DIR} && echo "Dateisicherung übersprungen, da BACKUP_CONTAO_FILES=${BACKUP_CONTAO_FILES} in $0" > ${TARGET_DIR}/${DUMP_NAME}_files_${NOW}.txt )
 fi
@@ -100,7 +100,7 @@ fi
 
 #  FILE_LIST sichern
 
-( cd ${CONTAO_DIR} && tar cfz ${TARGET_DIR}/${DUMP_NAME}_${NOW}.tar.gz ${FILE_LIST} )
+( cd ${CONTAO_DIR} && ${TAR} cf ${TARGET_DIR}/${DUMP_NAME}_${NOW}.tar ${FILE_LIST} && gzip ${TARGET_DIR}/${DUMP_NAME}_${NOW}.tar )
 
 
 # Datenbank Verbindungsdaten bestimmen

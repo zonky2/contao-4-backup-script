@@ -14,6 +14,8 @@
 
 PHP_CLI=php
 MYSQLDUMP=mysqldump
+#TAR=tar
+TAR=ptar
 
 
 # Zielverzeichnis = Wo sollen die erzeugten Backups abgelegt werden.
