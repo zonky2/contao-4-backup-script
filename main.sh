@@ -17,6 +17,25 @@ MYSQLDUMP=mysqldump
 #TAR=tar
 TAR=ptar
 
+# Optionale Parameter
+
+# Format des Zeitstempels, der als Bestandfteil der Backupdateien verwendet werden soll.
+# Standardwert (wenn nicht gesetzt) ist '%Y-%m-%d'.
+
+#BACKUP_TIMESTAMP_FORMAT='%Y-%m-%d_%H_%M_%S'
+
+# Dito für das Löschen der alten Backups (siehe PURGE_AFTER_DAYS weiter unten).
+# Muss "natürlich" zum BACKUP_TIMESTAMP_FORMAT passen!
+
+#PURGE_TIMESTAMP_FORMAT='%Y-%m-%d'
+
+# Betriebssystem. Wird benötigt um den Aufruf von date für die Bestimmung
+# des Datums vor PURGE_AFTER_DAYS (s.u.) zu bestimmen
+
+#OSNAME='Linux'
+#OSNAME='FreeBSD'
+#OSNAME='Darwin'
+
 
 # Zielverzeichnis = Wo sollen die erzeugten Backups abgelegt werden.
 # Auf einem Produktivsystem ist ein öffentlich zugängliches Verzeichnis

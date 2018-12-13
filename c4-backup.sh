@@ -38,16 +38,23 @@ then
 fi
 
 
-# Aktuelles Datum
+# Aktuelles Datum als Teil des Dateinamens der Basckupdateien.
+# Kann mit der Variablen BACKUP_TIMESTAMP_FORMAT konfiguriert werden.
+# Falls diese nicht gesetzt ist, wird ein Standard verwendet.
 
-NOW=$(date +"%Y-%m-%d")
+if [ -z "${BACKUP_TIMESTAMP_FORMAT}" ]
+then
+  BACKUP_TIMESTAMP_FORMAT='%Y-%m-%d'
+fi
+
+NOW=$(date +"${BACKUP_TIMESTAMP_FORMAT}")
 
 
 # Backup des files/ Verzeichnisses erstellen?
 
 if [ ${BACKUP_CONTAO_FILES} -gt 0 ]
 then
-    ( cd ${CONTAO_DIR} && ${TAR} cf ${TARGET_DIR}/${DUMP_NAME}_files_${NOW}.tar files && gzip ${TARGET_DIR}/${DUMP_NAME}_files_${NOW}.tar )
+    ( cd ${CONTAO_DIR} && ${TAR} cf ${TARGET_DIR}/${DUMP_NAME}_files_${NOW}.tar files && gzip --force ${TARGET_DIR}/${DUMP_NAME}_files_${NOW}.tar )
 else
     ( cd ${CONTAO_DIR} && echo "Dateisicherung übersprungen, da BACKUP_CONTAO_FILES=${BACKUP_CONTAO_FILES} in $0" > ${TARGET_DIR}/${DUMP_NAME}_files_${NOW}.txt )
 fi
@@ -100,7 +107,7 @@ fi
 
 #  FILE_LIST sichern
 
-( cd ${CONTAO_DIR} && ${TAR} cf ${TARGET_DIR}/${DUMP_NAME}_${NOW}.tar ${FILE_LIST} && gzip ${TARGET_DIR}/${DUMP_NAME}_${NOW}.tar )
+( cd ${CONTAO_DIR} && ${TAR} cf ${TARGET_DIR}/${DUMP_NAME}_${NOW}.tar ${FILE_LIST} && gzip --force ${TARGET_DIR}/${DUMP_NAME}_${NOW}.tar )
 
 
 # Datenbank Verbindungsdaten bestimmen
@@ -188,14 +195,22 @@ then
     # Betriebssystem ermitteln um den date-Aufruf entsprechend zu parametrisieren.
     # Linux vs. BSD (also auch MacOS).
 
-    UNAME=$(uname)
+    if [ -z "${OSNAME}" ]
+    then
+       OSNAME=$(uname)
+    fi
 
-    if [ "${UNAME}" = 'Linux' ]
+    if [ -z $ {PURGE_TIMESTAMP_FORMAT} ]
     then
-        OLD=$(date +"%Y-%m-%d" -d"${PURGE_AFTER_DAYS} days ago")
-    elif [[ ("${UNAME}" == 'FreeBSD') || ("${UNAME}" == 'Darwin') ]]
+        PURGE_TIMESTAMP_FORMAT='%Y-%m-%d'
+    fi
+
+    if [ "${OSNAME}" = 'Linux' ]
     then
-        OLD=$(date -v -${PURGE_AFTER_DAYS}d +"%Y-%m-%d")
+        OLD=$(date +"${PURGE_TIMESTAMP_FORMAT}" -d"${PURGE_AFTER_DAYS} days ago")
+    elif [[ ("${OSNAME}" == 'FreeBSD') || ("${OSNAME}" == 'Darwin') ]]
+    then
+        OLD=$(date -v -${PURGE_AFTER_DAYS}d +"${PURGE_TIMESTAMP_FORMAT}")
     else
         echo "unknown operating system"
         exit 1
