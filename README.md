@@ -18,6 +18,14 @@ Erstellt ein Backup einer Contao 4 Installation. Erzeugt werden drei Dateien:
 * Aufruf der `main.sh` manuell oder periodisch in einem cron-job
 
 
+## Restore
+
+* Backup-Dateien in das entsprechende Verzeichnis auf dem Server entpacken
+* Datenbankdump einspielen (Datenbank ggf. neu anlegen)
+* `composer install`
+* Aufruf des Contao Installtools im Browser
+
+
 ## Was noch fehlt
 
 * Liste der gesicherten Dateien auf "ist alles benötigte dabei" prüfen (möglichst viele 
@@ -29,11 +37,3 @@ und `my.cnf` so:
  [mysqldump]
  password=my_password
  ```
- 
-
-## Restore
-
-* Backup-Dateien in das entsprechende Verzeichnis auf dem Server entpacken
-* Datenbankdump einspielen (Datenbank ggf. neu anlegen)
-* `composer install`
-* Aufruf des Contao Installtools im Browser
