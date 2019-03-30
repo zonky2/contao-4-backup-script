@@ -202,7 +202,7 @@ then
     fi
 
     echo "loesche altes Backup vom '${OLD}'"
-    rm -f ${TARGET_DIR}/${DUMP_NAME}_${OLD}*
+    rm -f ${TARGET_DIR}/${DUMP_NAME}_*${OLD}*
     ls -lh ${TARGET_DIR}/${DUMP_NAME}_*
 fi
 
