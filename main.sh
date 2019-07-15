@@ -54,6 +54,7 @@ BACKUP_CONTAO_FILES=1
 # Bsp.:
 # * das share/ Verzeichnis mit der/den Sitemaps
 # * Unterverzeichnis(se) von system/modules/ bei manuell installierten Contao 3 Erweiterungen
+# * Dateien des Contao-Managers (contao-manager/)
 
 #BACKUP_USER_DIRS='web/share/ system/modules/myextension/'
 BACKUP_USER_DIRS=''
@@ -61,10 +62,10 @@ BACKUP_USER_DIRS=''
 
 # Wie BACKUP_USER_DIRS, nur für einzelne Dateien.
 # Kann für Dateien aus web/, die nicht zwingend existieren müssen
-# (wie z.B. web/robots.txt web/manifest.json) oder beliebige andere
-# Dateien verwendet werden. Angabe jeweils relativ zum CONTAO_DIR.
+# (wie z.B. web/robots.txt web/manifest.json), die Zugangsdaten für die app_dev.php (.env),
+# oder beliebige andere Dateien verwendet werden. Angabe jeweils relativ zum CONTAO_DIR.
 
-#BACKUP_USER_FILES='web/robots.txt web/manifest.json system/config/dcaconfig.php'
+#BACKUP_USER_FILES='.env web/robots.txt web/manifest.json system/config/dcaconfig.php'
 BACKUP_USER_FILES=''
 
 
