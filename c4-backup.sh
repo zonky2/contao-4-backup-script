@@ -187,13 +187,25 @@ if [ ${PURGE_AFTER_DAYS} -gt 0 ]
 then
     # Betriebssystem ermitteln um den date-Aufruf entsprechend zu parametrisieren.
     # Linux vs. BSD (also auch MacOS).
+    #
+    # Nur, falls das Betriebssystem nicht bereits in der Variablen OS angegeben wurde (siehe main.sh)
 
-    UNAME=$(uname)
+    if [ -z ${OS} ]
+    then
 
-    if [ "${UNAME}" = 'Linux' ]
+        if [ -z $(which uname) ]
+        then
+            echo "Kann Betriebssystem nicht bestimmen. Bitte in main.sh die Variable 'OS' setzen!"
+            exit 1
+        else
+            OS=$(uname)
+        fi
+    fi
+
+    if [ "${OS}" = 'Linux' ]
     then
         OLD=$(date +"%Y-%m-%d" -d"${PURGE_AFTER_DAYS} days ago")
-    elif [[ ("${UNAME}" == 'FreeBSD') || ("${UNAME}" == 'Darwin') ]]
+    elif [[ ("${OS}" == 'FreeBSD') || ("${OS}" == 'Darwin') ]]
     then
         OLD=$(date -v -${PURGE_AFTER_DAYS}d +"%Y-%m-%d")
     else

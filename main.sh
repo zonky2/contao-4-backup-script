@@ -89,6 +89,16 @@ DBOPTIONS='--hex-blob --add-drop-table --comments --dump-date'
 SKIP_THESE_TABLES='tl_log tl_search tl_search_index tl_session tl_undo tl_version'
 
 
+# Betriebssystem. Wird benötigt um beim `date`-Aufruf die Parameter geeignet zu setzen.
+# Wird automatisch bestimmt wenn der Befehl `uname` zur Verfügung steht, was nicht immer
+# der Fall ist -- siehe https://github.com/fiedsch/contao-4-backup-script/issues/6. In diesem
+# Fall muss hier die Variable OS gesetzt werden, die ansonsten undefiniert bleiben kann.
+
+# OS='Linux'
+# OS='Darwin'
+# OS='FreeBSD'
+
+
 # Alte Backups nach x Tagen periodisch löschen?
 # Auf 0 setzen um das Löschen zu deaktivieren.
 
