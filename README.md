@@ -23,6 +23,23 @@ Erstellt ein Backup einer Contao 4 Installation. Erzeugt werden drei Dateien:
     dadurch die bei All-Incl mutmaßlich auch gesperrten Befehle `uname`, `ls` und `rm` nicht
     ausgeführt.
 
+## Spezielle Anpassungen (abhängig vom Provider)
+
+Manche Provider stellen nicht alle im Skript benötigten Befehle bereit (sperren den Zugriff).
+Über spezielle Konfigurationsoptionen soll versucht werden, dies zu berücksichtigen.
+
+
+### All-Inkl
+
+In der `main.sh`
+* `TAR` auf den Wert `ptar` setzen
+* `OS` auf den Wert `Linux` setzen
+
+### Andere Provider
+
+Feedback zu weiteren Providern, bei denen es noch nicht gelöste Probleme gibt gerne
+als die Issue in diesem Repository - Danke!
+
 
 ## Restore
 

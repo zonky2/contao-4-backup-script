@@ -14,8 +14,11 @@
 
 PHP_CLI=php
 MYSQLDUMP=mysqldump
-#TAR=tar
-TAR=ptar
+
+# Bei manchen Providern ist tar nicht verfügbar.
+# Bei allinkl z.B. muss als Alternative ptar verwendet werden!
+TAR=tar
+#TAR=ptar
 
 # Optionale Parameter
 
@@ -29,12 +32,14 @@ TAR=ptar
 
 #PURGE_TIMESTAMP_FORMAT='%Y-%m-%d'
 
-# Betriebssystem. Wird benötigt um den Aufruf von date für die Bestimmung
-# des Datums vor PURGE_AFTER_DAYS (s.u.) zu bestimmen
+# Betriebssystem. Wird benötigt um beim `date`-Aufruf die Parameter geeignet zu setzen.
+## Wird automatisch bestimmt wenn der Befehl `uname` zur Verfügung steht, was nicht immer
+## der Fall ist -- siehe https://github.com/fiedsch/contao-4-backup-script/issues/6. In diesem
+## Fall muss hier die Variable OS gesetzt werden, die ansonsten undefiniert bleiben kann.
 
-#OSNAME='Linux'
-#OSNAME='FreeBSD'
-#OSNAME='Darwin'
+#OS='Linux'
+#OS='FreeBSD'
+#OS='Darwin'
 
 
 # Zielverzeichnis = Wo sollen die erzeugten Backups abgelegt werden.
@@ -75,7 +80,6 @@ BACKUP_CONTAO_FILES=1
 # Bsp.:
 # * das share/ Verzeichnis mit der/den Sitemaps
 # * Unterverzeichnis(se) von system/modules/ bei manuell installierten Contao 3 Erweiterungen
-# * Dateien des Contao-Managers (contao-manager/)
 
 #BACKUP_USER_DIRS='web/share/ system/modules/myextension/'
 BACKUP_USER_DIRS=''
@@ -85,6 +89,7 @@ BACKUP_USER_DIRS=''
 # Kann für Dateien aus web/, die nicht zwingend existieren müssen
 # (wie z.B. web/robots.txt web/manifest.json), die Zugangsdaten für die app_dev.php (.env),
 # oder beliebige andere Dateien verwendet werden. Angabe jeweils relativ zum CONTAO_DIR.
+
 
 #BACKUP_USER_FILES='.env web/robots.txt web/manifest.json system/config/dcaconfig.php'
 BACKUP_USER_FILES=''
@@ -109,16 +114,6 @@ DBOPTIONS='--hex-blob --add-drop-table --comments --dump-date'
 
 #SKIP_THESE_TABLES=''
 SKIP_THESE_TABLES='tl_log tl_search tl_search_index tl_session tl_undo tl_version'
-
-
-# Betriebssystem. Wird benötigt um beim `date`-Aufruf die Parameter geeignet zu setzen.
-# Wird automatisch bestimmt wenn der Befehl `uname` zur Verfügung steht, was nicht immer
-# der Fall ist -- siehe https://github.com/fiedsch/contao-4-backup-script/issues/6. In diesem
-# Fall muss hier die Variable OS gesetzt werden, die ansonsten undefiniert bleiben kann.
-
-# OS='Linux'
-# OS='Darwin'
-# OS='FreeBSD'
 
 
 # Alte Backups nach x Tagen periodisch löschen?
