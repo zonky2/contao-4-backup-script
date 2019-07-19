@@ -38,16 +38,23 @@ then
 fi
 
 
-# Aktuelles Datum
+# Aktuelles Datum als Teil des Dateinamens der Basckupdateien.
+# Kann mit der Variablen BACKUP_TIMESTAMP_FORMAT konfiguriert werden.
+# Falls diese nicht gesetzt ist, wird ein Standard verwendet.
 
-NOW=$(date +"%Y-%m-%d")
+if [ -z "${BACKUP_TIMESTAMP_FORMAT}" ]
+then
+  BACKUP_TIMESTAMP_FORMAT='%Y-%m-%d'
+fi
+
+NOW=$(date +"${BACKUP_TIMESTAMP_FORMAT}")
 
 
 # Backup des files/ Verzeichnisses erstellen?
 
 if [ ${BACKUP_CONTAO_FILES} -gt 0 ]
 then
-    ( cd ${CONTAO_DIR} && tar cfz ${TARGET_DIR}/${DUMP_NAME}_files_${NOW}.tar.gz files )
+    ( cd ${CONTAO_DIR} && ${TAR} cf ${TARGET_DIR}/${DUMP_NAME}_files_${NOW}.tar files && gzip --force ${TARGET_DIR}/${DUMP_NAME}_files_${NOW}.tar )
 else
     ( echo "Dateisicherung übersprungen, da BACKUP_CONTAO_FILES=${BACKUP_CONTAO_FILES} in $0" > ${TARGET_DIR}/${DUMP_NAME}_files_${NOW}.txt )
 fi
@@ -100,7 +107,7 @@ fi
 
 #  FILE_LIST sichern
 
-( cd ${CONTAO_DIR} && tar cfz ${TARGET_DIR}/${DUMP_NAME}_${NOW}.tar.gz ${FILE_LIST} )
+( cd ${CONTAO_DIR} && ${TAR} cf ${TARGET_DIR}/${DUMP_NAME}_${NOW}.tar ${FILE_LIST} && gzip --force ${TARGET_DIR}/${DUMP_NAME}_${NOW}.tar )
 
 
 # Datenbank Verbindungsdaten bestimmen
@@ -185,6 +192,12 @@ ${MYSQLDUMP} \
 
 if [ ${PURGE_AFTER_DAYS} -gt 0 ]
 then
+    # Varaible gesetzt? Ansonsten Default verwenden.
+    if [ -z "${PURGE_TIMESTAMP_FORMAT}" ]
+    then
+        PURGE_TIMESTAMP_FORMAT='%Y-%m-%d'
+    fi
+
     # Betriebssystem ermitteln um den date-Aufruf entsprechend zu parametrisieren.
     # Linux vs. BSD (also auch MacOS).
     #
@@ -204,10 +217,10 @@ then
 
     if [ "${OS}" = 'Linux' ]
     then
-        OLD=$(date +"%Y-%m-%d" -d"${PURGE_AFTER_DAYS} days ago")
+        OLD=$(date +"${PURGE_TIMESTAMP_FORMAT}" -d"${PURGE_AFTER_DAYS} days ago")
     elif [[ ("${OS}" == 'FreeBSD') || ("${OS}" == 'Darwin') ]]
     then
-        OLD=$(date -v -${PURGE_AFTER_DAYS}d +"%Y-%m-%d")
+        OLD=$(date -v -${PURGE_AFTER_DAYS}d +"${PURGE_TIMESTAMP_FORMAT}")
     else
         echo "unknown operating system"
         exit 1
