@@ -35,6 +35,13 @@ In der `main.sh`
 * `TAR` auf den Wert `ptar` setzen
 * `OS` auf den Wert `Linux` setzen
 
+### Mittwald
+
+In der `main.sh`
+* `OS` auf den Wert `Linux` setzen
+
+Aufruf auf Konsole mit bash: `bash ./main.sh`
+
 ### Andere Provider
 
 Feedback zu weiteren Providern, bei denen es noch nicht gelöste Probleme gibt gerne
